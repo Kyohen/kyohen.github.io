@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pickle!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .pickle {
+            position: absolute;
+            font-size: 3rem;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        .center-text {
+            text-align: center;
+            z-index: 10;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-text">Happy Birthday Pickle 🥒</div>
+
+    <script>
+        function createPickle() {
+            const pickle = document.createElement('div');
+            pickle.classList.add('pickle');
+            pickle.textContent = '🥒';
+            pickle.style.left = Math.random() * 100 + '%';
+            pickle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            pickle.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(pickle);
+
+            setTimeout(() => pickle.remove(), 7000);
+        }
+
+        setInterval(createPickle, 300);
+    </script>
+</body>
+</html>
