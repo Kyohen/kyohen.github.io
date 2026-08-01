@@ -19,8 +19,10 @@
 
         .pickle {
             position: absolute;
-            font-size: 3rem;
+            width: 3rem;
+            height: 3rem;
             animation: float linear infinite;
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -42,16 +44,49 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             font-weight: bold;
         }
+
+        .center-text img {
+            width: 1em;
+            height: 1em;
+            vertical-align: text-bottom;
+            margin-left: 0.25em;
+        }
     </style>
 </head>
 <body>
-    <div class="center-text">Happy Birthday Pickle 🥒</div>
+    <div class="center-text">
+        Happy Birthday Pickle! Love You x
+        <img id="center-pickle" alt="pickle emoji">
+    </div>
 
     <script>
+        const pickleSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+            <defs>
+                <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#9bc02d"/>
+                    <stop offset="100%" stop-color="#6a8d1e"/>
+                </linearGradient>
+            </defs>
+            <path d="M18 12c-3 10 0 35 15 48 15 13 28 9 32 0 4-9 4-36 0-48s-18-12-32-8c-14 4-14 3-15 8z" fill="url(#g)" stroke="#5c7a1a" stroke-width="4" stroke-linejoin="round"/>
+            <circle cx="25" cy="20" r="3" fill="#7db03b"/>
+            <circle cx="31" cy="35" r="3" fill="#7db03b"/>
+            <circle cx="38" cy="28" r="3" fill="#7db03b"/>
+            <circle cx="42" cy="45" r="3" fill="#7db03b"/>
+            <circle cx="30" cy="52" r="3" fill="#7db03b"/>
+            <circle cx="47" cy="18" r="3" fill="#7db03b"/>
+        </svg>`;
+
+        function getPickleDataUri() {
+            return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(pickleSvg);
+        }
+
+        document.getElementById('center-pickle').src = getPickleDataUri();
+
         function createPickle() {
-            const pickle = document.createElement('div');
+            const pickle = document.createElement('img');
             pickle.classList.add('pickle');
-            pickle.textContent = '🥒';
+            pickle.src = getPickleDataUri();
+            pickle.alt = 'pickle emoji';
             pickle.style.left = Math.random() * 100 + '%';
             pickle.style.animationDuration = (Math.random() * 3 + 4) + 's';
             pickle.style.animationDelay = Math.random() * 2 + 's';
